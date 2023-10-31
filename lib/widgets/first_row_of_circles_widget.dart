@@ -41,12 +41,15 @@ class Circle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.grey[600],
-      radius: 40,
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 40, fontWeight: FontWeight.normal),
+    return InkWell(
+      onTap: () {},
+      child: CircleAvatar(
+        backgroundColor: Colors.grey[600],
+        radius: 40,
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 40, fontWeight: FontWeight.normal),
+        ),
       ),
     );
   }
@@ -59,14 +62,17 @@ class CircleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.grey[600],
-      radius: 40,
+    return InkWell(
+      onTap: () {},
       child: CircleAvatar(
         backgroundColor: Colors.grey[600],
-        radius: 20,
-        child: Image.asset(
-          'images/back_icon.png',
+        radius: 40,
+        child: CircleAvatar(
+          backgroundColor: Colors.grey[600],
+          radius: 20,
+          child: Image.asset(
+            'images/back_icon.png',
+          ),
         ),
       ),
     );
