@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({
@@ -14,41 +15,44 @@ class _CalculatorState extends State<Calculator> {
   var result = '0';
   var expression = '';
 
+  String calculate() {
+    try {
+      expression = equation;
+      expression = expression.replaceAll('×', '*').replaceAll('÷', '/');
+      var exp = Parser().parse(expression);
+      var evaluation = exp.evaluate(EvaluationType.REAL, ContextModel());
+      return evaluation.toString();
+    } catch (e) {
+      return 'Error';
+    }
+  }
+
   void calculation(String buttonText) {
     if (buttonText == 'C') {
       setState(() {
         equation = '0';
         result = '0';
       });
-    } else if (buttonText == '0' ||
-        buttonText == '1' ||
-        buttonText == '2' ||
-        buttonText == '3' ||
-        buttonText == '4' ||
-        buttonText == '5' ||
-        buttonText == '6' ||
-        buttonText == '7' ||
-        buttonText == '8' ||
-        buttonText == '9') {
-      setState(() {
-        if (equation == '0') {
-          equation = buttonText;
-          result = equation;
-        } else {
-          equation = equation + buttonText;
-          result = equation;
-        }
-      });
     } else if (buttonText == '⌫') {
       setState(() {
         equation = equation.substring(0, equation.length - 1);
+        if (equation.isEmpty) {
+          equation = '0';
+        }
       });
-      if (equation == '') {
-        equation = '0';
-      }
+    } else if (buttonText == '=') {
+      setState(() {
+        equation = calculate();
+      });
+    } else {
+      setState(() {
+        if (equation == '0') {
+          equation = buttonText;
+        } else {
+          equation += buttonText;
+        }
+      });
     }
-
-    
   }
 
   @override
