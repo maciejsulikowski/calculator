@@ -10,15 +10,15 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  var numberText = '0';
-  var numberOne = '0';
-  var numberTwo = '0';
-  var result = '';
+  var equation = '0';
+  var result = '0';
+  var expression = '';
 
   void calculation(String buttonText) {
     if (buttonText == 'C') {
       setState(() {
-        numberText = numberOne;
+        equation = '0';
+        result = '0';
       });
     } else if (buttonText == '0' ||
         buttonText == '1' ||
@@ -31,9 +31,24 @@ class _CalculatorState extends State<Calculator> {
         buttonText == '8' ||
         buttonText == '9') {
       setState(() {
-        numberText = numberText.replaceFirst('0', '') + buttonText;
+        if (equation == '0') {
+          equation = buttonText;
+          result = equation;
+        } else {
+          equation = equation + buttonText;
+          result = equation;
+        }
       });
+    } else if (buttonText == '⌫') {
+      setState(() {
+        equation = equation.substring(0, equation.length - 1);
+      });
+      if (equation == '') {
+        equation = '0';
+      }
     }
+
+    
   }
 
   @override
@@ -50,23 +65,6 @@ class _CalculatorState extends State<Calculator> {
             buttonText,
             style: TextStyle(
                 fontSize: 40, fontWeight: FontWeight.normal, color: textColor),
-          ),
-        ),
-      );
-    }
-
-    Widget buttonIcon(Color buttonCollor, Color textColor) {
-      return InkWell(
-        onTap: () {},
-        child: CircleAvatar(
-          backgroundColor: buttonCollor,
-          radius: 40,
-          child: CircleAvatar(
-            backgroundColor: buttonCollor,
-            radius: 20,
-            child: Image.asset(
-              'images/back_icon.png',
-            ),
           ),
         ),
       );
@@ -89,7 +87,7 @@ class _CalculatorState extends State<Calculator> {
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: Text(
-                numberText,
+                equation,
                 style: const TextStyle(color: Colors.white, fontSize: 70),
               ),
             ),
@@ -107,7 +105,7 @@ class _CalculatorState extends State<Calculator> {
                 const SizedBox(
                   width: 10,
                 ),
-                buttonIcon(Colors.grey, Colors.black),
+                button('⌫', Colors.grey, Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
