@@ -1,1 +1,1 @@
-*.rb linguist-language=Dart
+*.cplusplus linguist-detectable=false
