@@ -13,14 +13,9 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   var equation = '0';
   var expression = '';
-  bool isAdditionEnabled = true;
-  bool isSubtractionEnabled = true;
-  bool isMultiplicationEnabled = true;
-  bool isDivisionEnabled = true;
-  bool showError = false;
 
   showingError() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         equation = '0';
       });
@@ -58,31 +53,27 @@ class _CalculatorState extends State<Calculator> {
         if (equation.endsWith('.0')) {
           equation = equation.replaceAll('.0', '');
         }
-        isAdditionEnabled = true;
-        isSubtractionEnabled = true;
-        isMultiplicationEnabled = true;
-        isDivisionEnabled = true;
       });
-    } else if (buttonText == '+' && isAdditionEnabled) {
-      setState(() {
-        equation += buttonText;
-        isAdditionEnabled = false;
-      });
-    } else if (buttonText == '-' && isSubtractionEnabled) {
-      setState(() {
-        equation += buttonText;
-        isSubtractionEnabled = false;
-      });
-    } else if (buttonText == '×' && isMultiplicationEnabled) {
-      setState(() {
-        equation += buttonText;
-        isMultiplicationEnabled = false;
-      });
-    } else if (buttonText == '÷' && isDivisionEnabled) {
-      setState(() {
-        equation += buttonText;
-        isDivisionEnabled = false;
-      });
+    } else if (buttonText == '+' ||
+        buttonText == '-' ||
+        buttonText == '×' ||
+        buttonText == '÷' ||
+        buttonText == '.' ||
+        buttonText == '%') {
+      if (equation.endsWith('+') ||
+          equation.endsWith('-') ||
+          equation.endsWith('×') ||
+          equation.endsWith('÷') ||
+          equation.endsWith('.') ||
+          equation.endsWith('%')) {
+        setState(() {
+          equation = equation.substring(0, equation.length - 1) + buttonText;
+        });
+      } else {
+        setState(() {
+          equation += buttonText;
+        });
+      }
     } else if (buttonText == '%') {
       if (equation != '0') {
         double value = double.parse(equation);
@@ -158,19 +149,19 @@ class _CalculatorState extends State<Calculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                button('C', Colors.grey[600], Colors.black),
+                button('C', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
-                button('%', Colors.grey[600], Colors.black),
+                button('%', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
-                button('⌫', Colors.grey[600], Colors.black),
+                button('⌫', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
-                button('÷', Colors.grey[600], Colors.black),
+                button('÷', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
@@ -192,7 +183,7 @@ class _CalculatorState extends State<Calculator> {
                 const SizedBox(
                   width: 10,
                 ),
-                button('×', Colors.grey[600], Colors.black),
+                button('×', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
@@ -214,7 +205,7 @@ class _CalculatorState extends State<Calculator> {
                 const SizedBox(
                   width: 10,
                 ),
-                button('-', Colors.grey[600], Colors.black),
+                button('-', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
@@ -236,7 +227,7 @@ class _CalculatorState extends State<Calculator> {
                 const SizedBox(
                   width: 10,
                 ),
-                button('+', Colors.grey[600], Colors.black),
+                button('+', Colors.grey[700], Colors.black),
                 const SizedBox(
                   width: 10,
                 ),
