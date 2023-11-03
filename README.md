@@ -1,16 +1,13 @@
-# calculator
+# Calculator
 
-A new Flutter project.
+Simply calculator to remind skills in Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Calculator**: Click a button and use this wonderful calculator.
 
-A few resources to get you started if this is your first Flutter project:
+## Gif's
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div gap: 50px;">
+  <img src="calc_gif.gif" width="30%" height="30%">
+</div>
